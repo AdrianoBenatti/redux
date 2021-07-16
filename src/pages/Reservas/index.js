@@ -1,23 +1,50 @@
 import React from "react";
-import { MdDelete } from "react-icons/md";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  removeReserve,
+  updateAmountReserve,
+} from "../../store/modules/reserve/action";
+import { MdDelete, MdAddCircle, MdRemoveCircle } from "react-icons/md";
 import "./style.css";
 
 export default function Reservas() {
+  const dispatch = useDispatch();
+  const reserves = useSelector((state) => state.reserve);
+
+  function handleRemove(id) {
+    dispatch(removeReserve(id));
+  }
+
+  function decrementAmount(trip) {
+    dispatch(updateAmountReserve(trip.id, trip.amount - 1));
+  }
+
+  function incrementAmount(trip) {
+    dispatch(updateAmountReserve(trip.id, trip.amount + 1));
+  }
+
   return (
     <div>
-      <h1 className="title">Você solicitou 1 reserva</h1>
+      <h1 className="title">Você solicitou {reserves.length} reservas</h1>
 
-      <div className="reservas">
-        <img
-          src="https://sujeitoprogramador.com/wp-content/uploads/2019/12/maceio.jpg"
-          alt="Maceio"
-        />
-        <strong>Viagem Maceio 7 dias</strong>
-        <strong>Quantidade: 2</strong>
-        <button tyoe="button" onClick={() => {}}>
-          <MdDelete size={20} color="#191919" />
-        </button>
-      </div>
+      {reserves.map((reserve) => (
+        <div className="reservas" key={reserve.id}>
+          <img src={reserve.image} alt={reserve.title} />
+          <strong>{reserve.title}</strong>
+          <div id="amount">
+            <button type="button" onClick={() => decrementAmount(reserve)}>
+              <MdRemoveCircle size={25} color="#191919" />
+            </button>
+            <input type="text" value={reserve.amount} readOnly />
+            <button type="button" onClick={() => incrementAmount(reserve)}>
+              <MdAddCircle size={25} color="#191919" />
+            </button>
+          </div>
+          <button tyoe="button" onClick={() => handleRemove(reserve.id)}>
+            <MdDelete size={20} color="#191919" />
+          </button>
+        </div>
+      ))}
 
       <footer>
         <button tyoe="button">Solicitar Reservas</button>

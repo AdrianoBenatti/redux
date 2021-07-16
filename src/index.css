@@ -21,6 +21,10 @@ button {
   cursor: pointer;
 }
 
+link {
+  cursor: pointer;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
