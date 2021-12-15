@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { addReserveRequest } from "../../store/modules/reserve/action";
 import { MdFlightTakeoff } from "react-icons/md";
 import api from "../../services/api";
-import "./style.css";
+import "../../assets/style/style.css";
 
 export default function Home() {
   const dispatch = useDispatch();

@@ -5,7 +5,7 @@ import {
   updateAmountReserve,
 } from "../../store/modules/reserve/action";
 import { MdDelete, MdAddCircle, MdRemoveCircle } from "react-icons/md";
-import "./style.css";
+import "../../assets/style/style.css";
 
 export default function Reservas() {
   const dispatch = useDispatch();
